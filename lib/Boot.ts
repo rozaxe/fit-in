@@ -5,6 +5,8 @@ module Toffee {
 
 		preload() {
 
+			this.stage.backgroundColor = 0xEEEEEE
+
 			// Loader assets
 
 		}

@@ -6,7 +6,7 @@ module Toffee {
 		preload() {
 
 			// Game's assets
-			this.load.image('toffee', 'assets/toffee.png')
+			this.load.image('tile', 'assets/tile.png')
 
 		}
 

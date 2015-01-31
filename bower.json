@@ -1,6 +1,6 @@
 {
-  "name": "toffeesquares.js",
-  "version": "1.0.0",
+  "name": "fitin",
+  "version": "0.0.1",
   "dependencies": {
     "phaser": "*"
   }
