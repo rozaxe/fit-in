@@ -3,6 +3,8 @@ module Toffee {
 
 	export class Tile extends Phaser.Sprite {
 
+		size: number = 32
+
 		// Tile position snapped
 		snapX: number
 		snapY: number
@@ -15,23 +17,23 @@ module Toffee {
 
 		constructor(game: Phaser.Game, x: number, y: number, shape: Shape) {
 
-			super(game, x, y, 'tile', 0)
+			super(game, 0, 0, 'tile', 0)
 
 			this.shape = shape
 
 			// Scale in pixel
-			this.scale.setTo(64)
+			this.position.setTo(x * this.size, y * this.size)
+			this.scale.setTo(this.size)
 
 			this.tint = 0xff0000
 
 			this.inputEnabled = true
-			this.input.useHandCursor = true
 			this.input.enableDrag()
 
 			// Snap on release
 			this.events.onDragStart.add(this.startSnapDrag, this)
 			this.events.onDragStop.add(this.stopSnapDrag, this)
-			this.input.enableSnap(64, 64, false, true)
+			this.input.enableSnap(this.size, this.size, false, true)
 
 			game.add.existing(this)
 
