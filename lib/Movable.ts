@@ -25,6 +25,7 @@ module Toffee {
 		stopSnapDrag() {
 			this.updateDist()
 			this.entity.follow(this)
+			this.entity.onRelease()
 		}
 
 		snapPosition() {

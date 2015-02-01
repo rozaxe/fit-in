@@ -4,7 +4,9 @@ module Toffee {
 
 	export class Shape extends Entity {
 
+		mold: Mold
 		grid: Array<Array<Movable>>
+		fit: boolean = false
 
 		constructor(game: Phaser.Game) {
 
@@ -50,6 +52,40 @@ module Toffee {
 
 
 			//game.add.existing(this)
+
+		}
+
+		// Shape realised
+		onRelease() {
+
+			if (this.fitting()) {
+				console.log("vii !")
+			} else {
+				console.log("nop")
+			}
+
+		}
+
+		// Return if shape fit in mold
+		fitting(): boolean {
+
+			var origin = this.mold.grid[0][0].position
+			var center = this.grid[Data.margin + Data.coat][Data.margin + Data.coat]
+			var dist = {x: center.x - origin.x, y: center.y - origin.y}
+			dist.x /= Data.size
+			dist.y /= Data.size
+			this.fit = true
+
+			this.forEach((child: Movable, d: any) => {
+
+					var relative = {x: d.x + (child.gridX - Data.margin - Data.coat), y: d.y + (child.gridY - Data.margin - Data.coat)}
+					if (!this.mold.isEmpty(relative.x, relative.y)) {
+						this.fit = false
+					}
+
+				}, this, dist)
+
+			return this.fit
 
 		}
 

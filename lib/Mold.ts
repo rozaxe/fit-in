@@ -27,7 +27,17 @@ module Toffee {
 			}
 
 
-			//game.add.existing(this)
+		}
+
+		// Check if there is void at the coordonate
+		isEmpty(x: number, y: number) {
+			if (Data.border <= x && x <= Data.border + Data.accumulation &&
+				Data.border <= y && y <= Data.border + Data.accumulation) {
+				if (!this.grid[x][y]) {
+					return true
+				}
+			}
+			return false
 		}
 
 	}

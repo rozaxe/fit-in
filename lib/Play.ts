@@ -10,6 +10,7 @@ module Toffee {
 			var shape = new Shape(this.game)
 			background.shape = shape
 			background.mold = mold
+			shape.mold = mold
 
 		}
 
