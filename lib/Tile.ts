@@ -3,7 +3,9 @@ module Toffee {
 
 	export class Tile extends Phaser.Sprite {
 
-		size: number = 32
+		// Tile position into the entity grid
+		gridX: number
+		gridY: number
 
 		// Tile position snapped
 		snapX: number
@@ -13,59 +15,38 @@ module Toffee {
 		distX: number
 		distY: number
 
-		shape: Shape
+		entity: Entity
 
-		constructor(game: Phaser.Game, x: number, y: number, shape: Shape) {
+		constructor(game: Phaser.Game, x: number, y: number, entity: Entity) {
 
 			super(game, 0, 0, 'tile', 0)
 
-			this.shape = shape
+			this.entity = entity
+			this.gridX = x
+			this.gridY = y
 
 			// Scale in pixel
-			this.position.setTo(x * this.size, y * this.size)
-			this.scale.setTo(this.size)
+			this.position.setTo(x * Data.size, y * Data.size)
+			this.scale.setTo(Data.size)
 
 			this.tint = 0xff0000
 
+			// Hover
 			this.inputEnabled = true
-			this.input.enableDrag()
-
-			// Snap on release
-			this.events.onDragStart.add(this.startSnapDrag, this)
-			this.events.onDragStop.add(this.stopSnapDrag, this)
-			this.input.enableSnap(this.size, this.size, false, true)
+			this.events.onInputOver.add(this.over, this)
+			//this.events.onInputOut.add(out, this)
 
 			game.add.existing(this)
 
 		}
 
-		startSnapDrag() {
-			this.shape.snap()
-		}
 
-		stopSnapDrag() {
-			this.updateDist()
-			this.shape.follow(this)
-		}
-
-		snapPosition() {
-			this.snapX = this.x
-			this.snapY = this.y
-		}
-
-		updateDist() {
-			this.distX = this.x - this.snapX
-			this.distY = this.y - this.snapY
-		}
-
-		update() {
-
-			if (this.input.isDragged) {
-				this.updateDist()
-				this.shape.follow(this)
+		over() {
+			if (this.entity.pressed) {
+				this.entity.kill(this)
 			}
-
 		}
+
 
 	}
 
