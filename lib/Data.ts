@@ -34,12 +34,56 @@ module Toffee {
 		static shapeX = (Data.half + Data.border + Data.split) * Data.size
 		static shapeY = Data.border * Data.size
 
+		// All shapes
+		static shapes = []
+
 		// Game's min size
 		static getWidth(): number {
 			return (Data.half * 2 + Data.border) * Data.size
 		}
 		static getHeight(): number {
 			return Data.half * Data.size
+		}
+
+		static parseDataShapes(file: string) {
+
+			var lines = file.split("\n")
+			var current = -1
+
+			for (var i = 0 ; i < lines.length ; ++i) {
+				var line = lines[i]
+
+				// Ignore commentary
+				if (line[0] == "#") {
+					continue
+				}
+
+				// Empty line
+				if (line.length == 0) {
+					if (Data.shapes[current] && Data.shapes[current].length != Data.accumulation) {
+						console.log("Warning shape number " + current + 1 + "\n")
+					}
+					++current
+					Data.shapes[current] = []
+					continue
+				}
+
+				// Warning if not good size
+				if (line.length != Data.accumulation) {
+					console.log("Warning at line " + i + "\n")
+				}
+
+				// File line shape with data
+				var tmp = []
+				for (var j = 0 ; j < line.length ; ++j) {
+					tmp.push(parseInt(line[j]))
+				}
+				Data.shapes[current].push(tmp)
+
+			}
+
+			Data.shapes.pop() // Remove last black ending
+
 		}
 
 	}

@@ -18,6 +18,22 @@ module Toffee {
 				this.grid[i] = new Array(Data.accumulation)
 			}
 
+			var shape = this.game.rnd.pick(Data.shapes)
+
+			for (var x = 0 ; x < shape.length ; ++x) {
+				for (var y = 0 ; y < shape.length ; ++y) {
+					switch (shape[x][y]) {
+						case 1:
+							this.grid[y][x] = new Movable(game, y, x, this)
+							break
+						case 2:
+							this.grid[y][x] = new Core(game, y, x, this)
+							break
+					}
+				}
+			}
+
+			/* Old version
 			// Create coat
 			for (var i = Data.margin ; i < Data.accumulation - Data.margin ; ++i) {
 
@@ -30,7 +46,6 @@ module Toffee {
 			}
 
 			// Create core
-
 			for (var i = Data.margin + Data.coat ; i < Data.accumulation - Data.margin - Data.coat ; ++i) {
 
 				for (var j = Data.margin + Data.coat ; j < Data.accumulation - Data.margin - Data.coat ; ++j) {
@@ -43,8 +58,12 @@ module Toffee {
 			}
 
 			// Create protrusion
+			this.protrusionBigTop(3)
+			this.protrusionBigDown(2)
+			//*/
 
-			//Move it to the left
+
+			//Move it to the left half
 			this.forEach((child: Tile) => {
 					child.x += Data.shapeX
 					child.y += Data.shapeY
@@ -124,6 +143,34 @@ module Toffee {
 					}
 
 				}, this, tile)
+
+		}
+
+		//
+		protrusionBigTop(distX: number) {
+
+			var count = 1
+
+			for (var y = 0 ; y < 3 ; ++y) {
+				for (var x = 0 ; x < count ; ++x) {
+					this.grid[distX + x][y] = new Movable(this.game, distX + x, y, this)
+				}
+				++count
+			}
+
+		}
+
+		protrusionBigDown(distX: number) {
+
+			var count = 3
+			var distY = Data.margin + Data.coat * 2 + Data.core
+
+			for (var y = distY ; y < distY + 3 ; ++y) {
+				for (var x = count ; x > 0 ; --x) {
+					this.grid[distX + x][y] = new Movable(this.game, distX + x, y, this)
+				}
+				--count
+			}
 
 		}
 
