@@ -3,6 +3,9 @@ module Toffee {
 
 	export class Data {
 
+		// Message style
+		static regular_style = { font: "32px Arial", fill: "#ffffff", align: "left" }
+
 		// Tile width / height
 		static size =  32
 

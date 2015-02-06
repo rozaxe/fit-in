@@ -8,7 +8,7 @@ module Toffee {
 
 			super(game, x, y, shape)
 
-			this.tint = 0x0000ff
+			//this.tint = 0x0000ff
 
 		}
 

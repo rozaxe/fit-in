@@ -33,44 +33,11 @@ module Toffee {
 				}
 			}
 
-			/* Old version
-			// Create coat
-			for (var i = Data.margin ; i < Data.accumulation - Data.margin ; ++i) {
-
-				for (var j = Data.margin ; j < Data.accumulation - Data.margin ; ++j) {
-
-					this.grid[i][j] = new Movable(game, i, j, this)
-
-				}
-
-			}
-
-			// Create core
-			for (var i = Data.margin + Data.coat ; i < Data.accumulation - Data.margin - Data.coat ; ++i) {
-
-				for (var j = Data.margin + Data.coat ; j < Data.accumulation - Data.margin - Data.coat ; ++j) {
-
-					this.grid[i][j].destroy()
-					this.grid[i][j] = new Core(game, i, j, this)
-
-				}
-
-			}
-
-			// Create protrusion
-			this.protrusionBigTop(3)
-			this.protrusionBigDown(2)
-			//*/
-
-
 			//Move it to the left half
 			this.forEach((child: Tile) => {
 					child.x += Data.shapeX
 					child.y += Data.shapeY
 				}, this)
-
-
-			//game.add.existing(this)
 
 		}
 

@@ -29,7 +29,7 @@ module Toffee {
 			this.position.setTo(x * Data.size, y * Data.size)
 			this.scale.setTo(Data.size)
 
-			this.tint = 0xff0000
+			this.tint = 0x00c0fc
 
 			// Hover
 			this.inputEnabled = true
