@@ -7,10 +7,17 @@ module Toffee {
 		mold: Mold
 		grid: Array<Array<Movable>>
 		fit: boolean = false
+		current: Play
+		first_diff: number
 
 		constructor(game: Phaser.Game) {
 
 			super(game)
+
+		}
+
+		// Populate
+		populate(shape: any) {
 
 			this.grid = new Array(Data.accumulation)
 
@@ -18,16 +25,14 @@ module Toffee {
 				this.grid[i] = new Array(Data.accumulation)
 			}
 
-			var shape = this.game.rnd.pick(Data.shapes)
-
 			for (var x = 0 ; x < shape.length ; ++x) {
 				for (var y = 0 ; y < shape.length ; ++y) {
 					switch (shape[x][y]) {
 						case 1:
-							this.grid[y][x] = new Movable(game, y, x, this)
+							this.grid[y][x] = new Movable(this.game, y, x, this)
 							break
 						case 2:
-							this.grid[y][x] = new Core(game, y, x, this)
+							this.grid[y][x] = new Core(this.game, y, x, this)
 							break
 					}
 				}
@@ -39,6 +44,15 @@ module Toffee {
 					child.y += Data.shapeY
 				}, this)
 
+			// how many diff
+			this.first_diff = this.diff()
+
+		}
+
+		onCatch() {
+
+			this.current.catched()
+
 		}
 
 		// Shape realised
@@ -46,10 +60,37 @@ module Toffee {
 
 			if (this.fitting()) {
 				console.log("vii !")
+				this.current.fitting()
 			} else {
 				console.log("nop")
+				this.current.notFitting()
 			}
 
+		}
+
+		diff(): number {
+			var diff = 0
+
+			for (var y = 0 ; y < this.grid.length ; ++y) {
+				for (var x = 0 ; x < this.grid.length ; ++x) {
+					if (Data.base[x][y] == 0 && this.grid[x][y] != null) {
+						++diff
+					}
+				}
+			}
+			return diff
+		}
+
+		empty() {
+			this.forEach((child: Tile) => {
+				this.kill(child)
+			}, this)
+		}
+
+		kill(tile: Tile) {
+			super.kill(tile)
+
+			this.current.cutted(this.diff() / this.first_diff)
 		}
 
 		// Return if shape fit in mold
@@ -110,34 +151,6 @@ module Toffee {
 					}
 
 				}, this, tile)
-
-		}
-
-		//
-		protrusionBigTop(distX: number) {
-
-			var count = 1
-
-			for (var y = 0 ; y < 3 ; ++y) {
-				for (var x = 0 ; x < count ; ++x) {
-					this.grid[distX + x][y] = new Movable(this.game, distX + x, y, this)
-				}
-				++count
-			}
-
-		}
-
-		protrusionBigDown(distX: number) {
-
-			var count = 3
-			var distY = Data.margin + Data.coat * 2 + Data.core
-
-			for (var y = distY ; y < distY + 3 ; ++y) {
-				for (var x = count ; x > 0 ; --x) {
-					this.grid[distX + x][y] = new Movable(this.game, distX + x, y, this)
-				}
-				--count
-			}
 
 		}
 

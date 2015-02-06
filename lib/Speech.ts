@@ -9,8 +9,6 @@ module Toffee {
 		constructor(game: Phaser.Game) {
 			super(game, 0, 0, null)
 
-			console.log(this)
-
 			this.bubble = this.game.add.graphics(0, 0)
 			this.bubble.beginFill(0x000000, 0.5)
 			this.bubble.drawRoundedRect(0, 0, 600, 96, 16)
@@ -32,7 +30,7 @@ module Toffee {
 
 		write(message: string) {
 
-			var parsed = ["coucou", "comment", "va", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?"]
+			var parsed = message.split(' ')
 
 			// Clear text
 			for (var i in this.messages) {

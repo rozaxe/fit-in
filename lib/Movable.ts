@@ -20,6 +20,7 @@ module Toffee {
 
 		startSnapDrag() {
 			this.entity.snap()
+			this.entity.onCatch()
 		}
 
 		stopSnapDrag() {

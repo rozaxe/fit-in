@@ -38,6 +38,7 @@ module Toffee {
 		static shapeY = Data.border * Data.size
 
 		// All shapes
+		static base = []
 		static shapes = []
 
 		// Game's min size
@@ -84,6 +85,8 @@ module Toffee {
 				Data.shapes[current].push(tmp)
 
 			}
+
+			Data.base = Data.shapes.shift()
 
 			Data.shapes.pop() // Remove last black ending
 

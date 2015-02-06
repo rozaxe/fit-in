@@ -7,6 +7,7 @@ module Toffee {
 
 			// Game's assets
 			this.load.image('tile', 'assets/tile.png')
+			this.load.image('pointer', 'assets/pointer.png')
 			this.load.text('shapes', 'assets/shapes.txt')
 
 		}
