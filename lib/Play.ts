@@ -70,10 +70,13 @@ module Toffee {
 			if (this.tutoNumber == 2) {
 				++this.tutoNumber
 				this.speech.write("He's fitting perfectly ! Let's do it with another.")
+				this.speech.autoClose()
 
-				this.shape.empty()
-				this.shape.populate(this.game.rnd.pick(Data.shapes))
 			}
+
+			// New shape
+			this.shape.empty()
+			this.shape.populate(this.game.rnd.pick(Data.shapes))
 
 		}
 

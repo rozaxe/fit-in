@@ -28,15 +28,20 @@ module Toffee {
 
 		}
 
-		write(message: string) {
-
-			var parsed = message.split(' ')
-
+		clear() {
 			// Clear text
 			for (var i in this.messages) {
 				this.removeChild(this.messages[i])
 				this.messages[i].destroy()
 			}
+		}
+
+		write(message: string) {
+
+			this.game.add.tween(this).to({alpha: 1}, 200).start()
+			this.clear()
+
+			var parsed = message.split(' ')
 
 			// Write text
 			var x = 16
@@ -64,6 +69,20 @@ module Toffee {
 				x += t.width + 12
 			}
 
+		}
+
+		autoClose() {
+
+			function fadeOut() {
+				var tween = this.game.add.tween(this)
+				tween.to({alpha: 0}, 200)
+				tween.onComplete.add(() => {
+						this.clear()
+					}, this)
+				tween.start()
+			}
+
+			this.game.time.events.add(Phaser.Timer.SECOND * 2, fadeOut, this);
 		}
 
 	}

@@ -6,6 +6,10 @@ module Toffee {
 		// Message style
 		static regular_style = { font: "32px Arial", fill: "#ffffff", align: "left" }
 
+		// Color
+		static binaire = [0x00c0fc, 0xfc0080]
+		static rainbow = [0x00fc5f, 0xfc9400, 0xb513af, 0xbf0531]
+
 		// Tile width / height
 		static size =  32
 

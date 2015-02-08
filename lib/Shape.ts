@@ -9,11 +9,11 @@ module Toffee {
 		fit: boolean = false
 		current: Play
 		first_diff: number
+		bin: number
+		rainbow: number
 
 		constructor(game: Phaser.Game) {
-
 			super(game)
-
 		}
 
 		// Populate
@@ -47,6 +47,18 @@ module Toffee {
 			// how many diff
 			this.first_diff = this.diff()
 
+			this.bin = this.game.rnd.pick(Data.binaire)
+			this.rainbow = this.game.rnd.pick(Data.rainbow)
+
+			this.setColor(this.rainbow)
+
+		}
+
+		// Color the shape !
+		setColor(color: number) {
+			this.forEach((child: Tile) => {
+					child.tint = color
+				}, this)
 		}
 
 		onCatch() {
@@ -90,7 +102,11 @@ module Toffee {
 		kill(tile: Tile) {
 			super.kill(tile)
 
-			this.current.cutted(this.diff() / this.first_diff)
+			var delta = this.diff()
+
+			this.setColor(Phaser.Color.interpolateColor(this.bin, this.rainbow, this.first_diff, delta, 1))
+
+			this.current.cutted(delta / this.first_diff)
 		}
 
 		// Return if shape fit in mold
