@@ -9,6 +9,10 @@ module Toffee {
 		// Check if background is pressed
 		pressed: boolean = false
 
+		// Color
+		bin: number
+		rainbow: number
+
 		constructor(game: Phaser.Game) {
 
 			super(game)
@@ -18,8 +22,8 @@ module Toffee {
 		}
 
 		forEach(callback: Function, context: any, ...args: any[]) {
-			for (var i = 0 ; i < Data.accumulation ; ++i) {
-				for (var j = 0 ; j < Data.accumulation ; ++j) {
+			for (var i = 0 ; i < this.grid.length ; ++i) {
+				for (var j = 0 ; j < this.grid.length ; ++j) {
 					if (this.grid[i][j]) {
 						if (args.length > 0) {
 							var tmp = args.slice()
@@ -33,9 +37,22 @@ module Toffee {
 			}
 		}
 
+		// Color the entity !
+		setColor(color: number) {
+			this.forEach((child: Tile) => {
+					child.tint = color
+			}, this)
+		}
+
 		// Check for isolate tile
 		clean() {
 			// TODO
+		}
+
+		empty() {
+			this.forEach((child: Tile) => {
+				this.kill(child)
+			}, this)
 		}
 
 		kill(tile: Tile) {

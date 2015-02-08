@@ -6,6 +6,9 @@ module Toffee {
 
 		constructor(game: Phaser.Game) {
 			super (game)
+		}
+
+		populate() {
 
 			this.grid = new Array(Data.half)
 			for (var i = 0 ; i < Data.half ; ++i) {
@@ -25,7 +28,6 @@ module Toffee {
 					this.kill(this.grid[i][j])
 				}
 			}
-
 
 		}
 
