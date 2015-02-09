@@ -3,8 +3,18 @@ module Toffee {
 
 	export class Data {
 
+		// Text
+		static wailings = [
+			"Please stop...",
+			"It hurts...",
+			"Aïe...",
+			"Ouch...",
+			"Pleeease no..."
+		]
+
 		// Message style
 		static regular_style = { font: "32px Arial", fill: "#ffffff", align: "left" }
+		static wailing_style = { font: "16px Arial", fill: "#252525", align: "left" }
 
 		// Color
 		static binaire = [0x00c0fc, 0xfc0080]

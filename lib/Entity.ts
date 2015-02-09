@@ -9,6 +9,8 @@ module Toffee {
 		// Check if background is pressed
 		pressed: boolean = false
 
+		current: Play
+
 		// Color
 		bin: number
 		rainbow: number

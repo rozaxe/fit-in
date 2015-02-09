@@ -4,6 +4,8 @@ module Toffee {
 
 	export class Mold extends Entity {
 
+		counter = 0
+
 		constructor(game: Phaser.Game) {
 			super (game)
 		}
@@ -29,6 +31,13 @@ module Toffee {
 				}
 			}
 
+		}
+
+		kill(tile: Tile) {
+			super.kill(tile)
+			if (this.pressed) {
+				this.current.breakingMold(++this.counter)
+			}
 		}
 
 		// Check if there is void at the coordonate

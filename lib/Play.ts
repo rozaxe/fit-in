@@ -6,8 +6,10 @@ module Toffee {
 		mold: Mold
 		shape: Shape
 		speech: Speech
+		wailings: Wailings
 		tuto: Tuto
 		tutoNumber = 0
+		breaked = false
 
 		create() {
 
@@ -16,11 +18,13 @@ module Toffee {
 			this.shape = new Shape(this.game)
 			this.speech = new Speech(this.game)
 			this.tuto = new Tuto(this.game)
+			this.wailings = new Wailings(this.game)
 
 			background.shape = this.shape
 			background.mold = this.mold
 			this.shape.mold = this.mold
 			this.shape.current = this
+			this.mold.current = this
 
 			this.firstWave()
 
@@ -54,10 +58,34 @@ module Toffee {
 			this.game.world.bringToTop(this.speech)
 		}
 
+		breakingMold(nb: number) {
+			this.closeTuto()
+			this.breaked = true
+			if (nb == 1) {
+				this.speech.write("%WATCH %OUT ! Don't break the mold again !")
+			} else if (nb == 3) {
+				this.speech.write("%STOP %! %STOP %NOW %! %LEAVE %IT %!")
+			} else if (nb == 5) {
+				this.speech.write("Why did you do that ! What about the norm ! Stop it !")
+			} else if (nb > 5) {
+				this.speech.write("Seriously ! You *can't do that ")
+			}
+
+		}
+
+		closeTuto() {
+			this.tutoNumber = 500
+			this.tuto.stopIt()
+		}
+
 		cutted(percent: number) {
 			if (this.tutoNumber == 2) {
 				if (percent == 0) {
 					this.speech.write("Great ! Put him into the mold.")
+				}
+			} else if (this.tutoNumber >= 2) {
+				if (0.4 <= percent && percent <= 0.6) {
+					this.wailings.newOne()
 				}
 			}
 		}
@@ -66,13 +94,16 @@ module Toffee {
 			if (this.tutoNumber == 2) {
 
 			}
+			if (this.breaked) {
+				this.speech.write("%NO ! Don't put _that inside !")
+			}
 		}
 
 		notFitting() {
 			if (this.tutoNumber == 0) {
 				++this.tutoNumber
 
-				this.speech.write("See, _it_ doesn't fit. Drag it back were it was.")
+				this.speech.write("See, _it doesn't fit. Drag it back were it was.")
 				this.tuto.dragBack()
 
 			} else if (this.tutoNumber == 1) {

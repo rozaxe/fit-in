@@ -7,7 +7,6 @@ module Toffee {
 		mold: Mold
 		grid: Array<Array<Movable>>
 		fit: boolean = false
-		current: Play
 		delta: number
 		first_diff: number
 
