@@ -12,16 +12,28 @@ module Toffee {
 			"Pleeease no..."
 		]
 
+		static clue = [
+			"I love this @mold ! It's so about the @norm !",
+			"Luckily, our @mold is @indestructible !",
+			"Can you @guess if we didn't have this @mold ?"
+		]
+
 		static cool = [
 			"Nice one",
 			"Sharp as well",
-			"Perfect"
+			"Perfect",
+			"Fit really well",
+			"Like everyone !",
 		]
 
 		// Message style
-		static regular_style = { font: "32px Arial", fill: "#ffffff", align: "left" }
-		static wailing_style = { font: "16px Arial", fill: "#252525", align: "left" }
-		static cool_style = { font: "32px Arial", fill: "#ffffff", align: "center" }
+		static regular_style = { font: "24px 'Open Sans'", fill: "#ffffff", align: "left", fontWeight: "bold" }
+		static blue_style = { font: "24px 'Open Sans'", fill: "#00c0fc", align: "left", fontWeight: "bold" }
+		static clue_style = { font: "24px 'Open Sans'", fill: "#ffffff", align: "left", fontWeight: "bold", bounce: true }
+		static eurk_style = { font: "28px 'Amatic SC'", fill: "#ffffff", align: "left", minusY: true }
+		static wailing_style = { font: "18px Calligraffitti", fill: "#252525", align: "left" }
+		static cool_style = { font: "32px 'Open Sans'", fill: "#ffffff", align: "center" }
+		static nooo_style = { font: "24px 'Open Sans'", fill: "#ffffff", align: "center", anim: true }
 
 		// Color
 		static binaire = [0x00c0fc, 0xfc0080]

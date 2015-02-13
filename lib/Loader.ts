@@ -15,8 +15,21 @@ module Toffee {
 		create() {
 
 			Data.parseDataShapes(this.game.cache.getText('shapes'))
-			this.game.state.start('Play')
 
+			// Create dump text
+			var dd = [Data.regular_style, Data.eurk_style, Data.wailing_style]
+			for (var i in dd) {
+				var txt = new Phaser.Text(this.game, 0, 0, "dd", dd[i])
+				txt.destroy()
+			}
+
+			this.game.time.events.add(Phaser.Timer.SECOND, this.nextState, this)
+
+
+		}
+
+		nextState() {
+			this.game.state.start('Play')
 		}
 
 	}

@@ -10,10 +10,12 @@ module Toffee {
 		tuto: Tuto
 		tutoNumber = 0
 		breaked = false
+		counter = 0
 
 		create() {
 
 			var background = new Background(this.game)
+			var border = new Border(this.game)
 			this.mold = new Mold(this.game)
 			this.shape = new Shape(this.game)
 			this.speech = new Speech(this.game)
@@ -51,6 +53,7 @@ module Toffee {
 			//this.mold.empty()
 			//this.mold.populate()
 			this.shape.populate(this.game.rnd.pick(Data.shapes))
+			++this.counter
 
 			this.game.world.bringToTop(this.speech)
 		}
@@ -59,13 +62,13 @@ module Toffee {
 			this.closeTuto()
 			this.breaked = true
 			if (nb == 1) {
-				this.speech.write("%WATCH %OUT ! Don't break the mold again !")
-			} else if (nb == 3) {
+				this.speech.write("%WATCH %OUT %! Don't break the mold again !")
+			} else if (nb == 4) {
+				this.speech.write("%Why did you do that ! %What about the norm ! %Stop %it %!")
+			} else if (nb > 8) {
 				this.speech.write("%STOP %! %STOP %NOW %! %LEAVE %IT %!")
-			} else if (nb == 5) {
-				this.speech.write("Why did you do that ! What about the norm ! Stop it !")
-			} else if (nb > 5) {
-				this.speech.write("Seriously ! You *can't do that ")
+			} else if (nb > 12) {
+				this.speech.write("%STOP %! Seriously ! You %can't do that %!")
 			}
 
 		}
@@ -78,7 +81,7 @@ module Toffee {
 		cutted(percent: number) {
 			if (this.tutoNumber == 2) {
 				if (percent == 0) {
-					this.speech.write("Great ! Put him into the mold.")
+					this.speech.write("Great ! Put ùhim into the mold.")
 				}
 			} else if (this.tutoNumber >= 2) {
 				if (0.4 <= percent && percent <= 0.6) {
@@ -120,8 +123,6 @@ module Toffee {
 
 			} else if (this.tutoNumber == 2) {
 				++this.tutoNumber
-				this.speech.write("He's fitting perfectly ! Let's do it with another.")
-				this.speech.autoClose()
 
 			}
 
@@ -142,6 +143,17 @@ module Toffee {
 
 			this.mold.setColor(this.shape.bin)
 			this.mold.rainbow = this.shape.rainbow
+
+			if (this.tutoNumber == 3) {
+				++this.tutoNumber
+				this.speech.write("ùHe's fitting perfectly ! Let's do it with another.")
+				this.speech.autoClose()
+			}
+
+			if (this.counter > 3) {
+				this.speech.write(this.game.rnd.pick(Data.clue))
+				this.speech.autoClose()
+			}
 
 		}
 

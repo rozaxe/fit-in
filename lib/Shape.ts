@@ -119,22 +119,6 @@ module Toffee {
 
 		}
 
-		forEach(callback: Function, context: any, ...args: any[]) {
-			for (var i = 0 ; i < Data.accumulation ; ++i) {
-				for (var j = 0 ; j < Data.accumulation ; ++j) {
-					if (this.grid[i][j]) {
-						if (args.length > 0) {
-							var tmp = args.slice()
-							tmp.unshift(this.grid[i][j])
-							callback.apply(context, tmp)
-						} else {
-							callback.call(context, this.grid[i][j])
-						}
-					}
-				}
-			}
-		}
-
 		snap() {
 
 			this.forEach((child: Movable) => {

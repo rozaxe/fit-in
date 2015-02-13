@@ -4,7 +4,7 @@ module Toffee {
 
 	export class Core extends Movable {
 
-		constructor(game: Phaser.Game, x: number, y: number, shape: Shape) {
+		constructor(game: Phaser.Game, x: number, y: number, shape: any) {
 
 			super(game, x, y, shape)
 

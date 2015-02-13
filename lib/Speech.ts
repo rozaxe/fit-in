@@ -11,7 +11,7 @@ module Toffee {
 
 			this.bubble = this.game.add.graphics(0, 0)
 			this.bubble.beginFill(0x000000, 0.5)
-			this.bubble.drawRoundedRect(0, 0, 600, 96, 16)
+			this.bubble.drawRect(0, 0, 600, 96)
 
 			this.messages = []
 			var t = this.game.add.text(0, 0, "Test", Data.regular_style)
@@ -22,7 +22,7 @@ module Toffee {
 
 			this.anchor.setTo(0.5, 0)
 			this.x = this.game.world.centerX - this.bubble.width / 2
-			this.y = 16
+			this.y = 0
 
 			this.game.add.existing(this)
 
@@ -48,7 +48,24 @@ module Toffee {
 			var y = 0
 			for (var j in parsed) {
 				// Create a tempory text
-				var t = this.game.add.text(0, 0, parsed[j], Data.regular_style)
+				var txt = parsed[j]
+				var style: any = Data.regular_style
+
+				if (txt[0] == '_') {
+					txt = txt.substr(1)
+					style = Data.eurk_style
+				} else if (txt[0] == '%') {
+					txt = txt.substr(1)
+					style = Data.nooo_style
+				} else if (txt[0] == 'ù') {
+					txt = txt.substr(1)
+					style = Data.blue_style
+				} else if (txt[0] == '@') {
+					txt = txt.substr(1)
+					style = Data.clue_style
+				}
+
+				var t = this.game.add.text(0, 0, txt, style)
 
 				// Check where to put it
 				if (x + t.width > 584) {
@@ -61,7 +78,20 @@ module Toffee {
 				}
 
 				// Postionne it where it belong
-				t.position.setTo(x, y + 10)
+				t.position.setTo(x, y + 10 + (style.minusY ? -4 : 0) )
+
+				if (style.anim) {
+					var ax = t.x
+					var ay = t.y
+					this.game.add.tween(t).to({x: ax + 2}, 10).to({y: ay + 2}, 10).to({x: ax}, 10).to({y: ay}, 10).loop().start()
+				}
+
+				if (style.bounce) {
+					t.angle = - 5
+					this.game.add.tween(t).to({angle: 5}, 900).to({angle: -5}, 900).loop().start()
+					//this.game.add.tween(t).to({alpha: 0.2}, 100).to({alpha: 1}, 100).loop().start()
+				}
+
 				this.addChild(t)
 				this.messages.push(t)
 
@@ -82,7 +112,7 @@ module Toffee {
 				tween.start()
 			}
 
-			this.game.time.events.add(Phaser.Timer.SECOND * 2, fadeOut, this);
+			this.game.time.events.add(Phaser.Timer.SECOND * 4, fadeOut, this);
 		}
 
 	}
