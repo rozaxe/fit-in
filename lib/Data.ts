@@ -12,9 +12,16 @@ module Toffee {
 			"Pleeease no..."
 		]
 
+		static cool = [
+			"Nice one",
+			"Sharp as well",
+			"Perfect"
+		]
+
 		// Message style
 		static regular_style = { font: "32px Arial", fill: "#ffffff", align: "left" }
 		static wailing_style = { font: "16px Arial", fill: "#252525", align: "left" }
+		static cool_style = { font: "32px Arial", fill: "#ffffff", align: "center" }
 
 		// Color
 		static binaire = [0x00c0fc, 0xfc0080]

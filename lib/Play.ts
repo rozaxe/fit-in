@@ -48,12 +48,9 @@ module Toffee {
 		newWave() {
 			// New shape
 			this.shape.empty()
-			this.mold.empty()
-			this.mold.populate()
+			//this.mold.empty()
+			//this.mold.populate()
 			this.shape.populate(this.game.rnd.pick(Data.shapes))
-
-			this.mold.setColor(this.shape.bin)
-			this.mold.rainbow = this.shape.rainbow
 
 			this.game.world.bringToTop(this.speech)
 		}
@@ -128,7 +125,23 @@ module Toffee {
 
 			}
 
+			var old = this.shape.bin
+
 			this.newWave()
+			this.shape.forEach((child: Tile) => {
+					child.alpha = 0
+				}, this)
+			var trans = new Trans(this.game, this, old)
+
+		}
+
+		appear() {
+			this.shape.forEach((child: Tile) => {
+					child.alpha = 1
+				}, this)
+
+			this.mold.setColor(this.shape.bin)
+			this.mold.rainbow = this.shape.rainbow
 
 		}
 
