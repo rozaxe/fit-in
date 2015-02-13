@@ -9,7 +9,10 @@ module Toffee {
 			"It hurts...",
 			"Aïe...",
 			"Ouch...",
-			"Pleeease no..."
+			"Please no...",
+			"Don't cut me...",
+			"You hurt me...",
+			"No..."
 		]
 
 		static clue = [
@@ -38,7 +41,7 @@ module Toffee {
 
 		// Color
 		static binaire = [0x00c0fc, 0xfc0080]
-		static rainbow = [0x00fc5f, 0xfc9400, 0xb513af, 0xbf0531]
+		static rainbow = [0x00fc5f, 0xfc9400, 0xb513af, 0xbf0531, 0xead704, 0x05afa1]
 
 		// Tile width / height
 		static size =  32

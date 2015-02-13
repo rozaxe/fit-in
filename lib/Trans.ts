@@ -65,7 +65,7 @@ module Toffee {
 
 		ending() {
 			// just be yourself
-			this.toText("... just be yourself.", null)
+			this.toText("... be yourself.", null)
 		}
 
 		toText(mess: string, after: Function) {

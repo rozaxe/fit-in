@@ -63,10 +63,8 @@ module Toffee {
 		onRelease() {
 
 			if (this.fitting()) {
-				console.log("vii !")
 				this.current.fitting()
 			} else {
-				console.log("nop")
 				this.current.notFitting()
 			}
 
