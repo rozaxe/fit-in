@@ -32,6 +32,7 @@ module Toffee {
 		static clue_style = { font: "24px 'Open Sans'", fill: "#ffffff", align: "left", fontWeight: "bold", bounce: true }
 		static eurk_style = { font: "28px 'Amatic SC'", fill: "#ffffff", align: "left", minusY: true }
 		static wailing_style = { font: "18px Calligraffitti", fill: "#252525", align: "left" }
+		static thanks_style = { font: "32px Calligraffitti", fill: "#ffffff", align: "left" }
 		static cool_style = { font: "32px 'Open Sans'", fill: "#ffffff", align: "center" }
 		static nooo_style = { font: "24px 'Open Sans'", fill: "#ffffff", align: "center", anim: true }
 

@@ -117,9 +117,12 @@ module Toffee {
 		fitting() {
 			if (this.shape.first_diff == this.shape.delta) {
 
-				console.log("victory !")
-				alert("Perfect ! Don't let anyone choose who you are. Be yourself !")
-				alert("The end ! =3")
+				var trans = new Trans(this.game, this, this.shape.rainbow, true)
+				return
+
+				//console.log("victory !")
+				//alert("Perfect ! Don't let anyone choose who you are. Be yourself !")
+				//alert("The end ! =3")
 
 			} else if (this.tutoNumber == 2) {
 				++this.tutoNumber
