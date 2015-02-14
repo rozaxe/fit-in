@@ -31,6 +31,10 @@ module Toffee {
 				}
 			}
 
+			// Put corner left not breable
+			this.kill(this.grid[0][0])
+			this.grid[0][0] = new Core(this.game, 0, 0, this)
+
 		}
 
 		kill(tile: Tile) {
