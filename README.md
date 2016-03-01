@@ -1,26 +1,16 @@
 
-ToffeeSquares.js
+Fit-in
 ================
 
-![ToffeeSquares logo](assets/toffee.png "TS.js logo")
+In this world, some **shapes** don't *fit* the **mold**.
 
-Get quickly started to develop an awesome *Phaser* game using *TypeScript*.
+Maybe **you** can help us to *make them* fit ?
 
+---
 
-Get started
------------
+Game realized for the [#JamForLeelah](https://itch.io/jam/jamforleelah)
 
-First get the succulent ingredients.
-```bash
-npm install
-bower install
-```
+## License
 
-Next, made a tasteful game using *TypeScript*. All the `.ts` go to `lib/`
+MIT © [Axel ЯB](https://github.com/rozaxe)
 
-At least, see your delicious game using `grunt` command-line.
-
-License
--------
-
-[CC0](https://creativecommons.org/publicdomain/zero/1.0/ "Public Domain")
